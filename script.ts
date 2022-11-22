@@ -38,7 +38,9 @@ async function main(){
 			// } this is for composite key
 			name:"yafet"
 		},
-		distinct:["name"]
+		// distinct:["name"]
+		// take:2
+		skip:1
 	})
 
 	// const user = await prisma.user.createMany({
