@@ -31,7 +31,11 @@ async function main(){
 
 	const user = await prisma.user.findUnique({
 		where:{
-			email:"yafet123@gmail.com",
+			// email:"yafet123@gmail.com",
+			age_name:{
+				age:24,
+				name:"yafet"
+			}
 		},
 	})
 
