@@ -14,12 +14,12 @@ model user{
   id String @id @default(uuid())
   age Int
   name String
-  email String
+  email String @unique
   role Role @default(BASIC)
   writtnPosts Post[] @relation("WrittenPosts")
   favouritePosts Post[] @relation("favouritePosts")
   userPreferences userPreferences? @relation(fields:[userPreferencesid], references:[id]) 
-  userPreferencesid String @unique
+  userPreferencesid String? @unique
 
   @@unique([age,name])
   @@index([email]) 
