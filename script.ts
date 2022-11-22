@@ -29,27 +29,35 @@ async function main(){
 	// 	// return the user name and the userprefences
 	// })
 
-	const user = await prisma.user.findUnique({
+	const user = await prisma.user.findMany({
 		where:{
 			// email:"yafet123@gmail.com",
-			age_name:{
-				age:24,
-				name:"yafet"
-			}
+			// age_name:{
+			// 	age:24,
+			// 	name:"yafet"
+			// } this is for composite key
+			name:"yafet"
 		},
+		distinct:["name"]
 	})
 
 	// const user = await prisma.user.createMany({
 	// 	data:[
 	// 		{
 	// 			name:"yafet",
-	// 			email:"yafet123@gmail.com",
-	// 			age:24,
+	// 			email:"yafet1@gmail.com",
+	// 			age:25,
 	// 		},
 	// 		{
-	// 			name:"addisu",
-	// 			email:"addisu@gmail.com",
-	// 			age:45,
+	// 			name:"yafet",
+	// 			email:"yafet2@gmail.com",
+	// 			age:16,
+
+	// 		},
+	// 		{
+	// 			name:"yafet",
+	// 			email:"yafet3@gmail.com",
+	// 			age:19,
 
 	// 		},
 	// 	],
