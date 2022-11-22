@@ -4,12 +4,24 @@ const prisma = new PrismaClient()
 async function main(){
 	// const user = await prisma.user.create({data:{name:"bini"}})
 	await prisma.user.deleteMany()
+	// every time we save we are deleting the user then we are saving the file 
 	const user = await prisma.user.create({
 		data:{
 			name:"yafet",
 			email:"yafet123@gmail.com",
 			age:24,
-			
+			userPreferences:{
+				create:{
+					emailUpdates:true
+				}
+			}
+		},
+		// include:{
+		// 	userPreferences:true,
+		// },
+		select:{
+			name:true,
+			userPreferences:true
 		}
 	})
 	console.log(user)
