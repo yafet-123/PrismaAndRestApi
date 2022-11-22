@@ -11,6 +11,40 @@ datasource db {
 }
 
 model user{
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
+  age Int
   name String
+  email String
+  isAdmin Boolean
+  writtnPosts : Post[] @relation("WrittenPosts")
+  favouritePosts : Post[] @relation("favouritePosts")
+  userPreferences userPreferences?
+
+  @@unique([age,name])
+}
+
+model userPreferences{
+  id String @id @default(uuid())
+  emailUpdates Boolean
+  User user @relation(fields:[userid], references:[id]) 
+  userid String @unique
+}
+
+model Post{
+  id String @id @default(uuid())
+  title String
+  rating Float
+  createdAt DateTime
+  updatedAt DateTime
+  author user @relation("WrittenPosts",fields:[authorid], references:[id])
+  authorid String
+  favouriteBy user? @relation("favouritePosts",fields:[authorid], references:[id])
+  favouriteByid String?
+  categories category[]
+}
+
+model category{
+  id String @id @default(uuid())
+  name String 
+  posts Post[]
 }
