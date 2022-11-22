@@ -15,12 +15,13 @@ model user{
   age Int
   name String
   email String
-  isAdmin Boolean
-  writtnPosts : Post[] @relation("WrittenPosts")
-  favouritePosts : Post[] @relation("favouritePosts")
+  role Role @default(BASIC)
+  writtnPosts Post[] @relation("WrittenPosts")
+  favouritePosts Post[] @relation("favouritePosts")
   userPreferences userPreferences?
 
   @@unique([age,name])
+  @@index([email]) 
 }
 
 model userPreferences{
@@ -38,7 +39,7 @@ model Post{
   updatedAt DateTime
   author user @relation("WrittenPosts",fields:[authorid], references:[id])
   authorid String
-  favouriteBy user? @relation("favouritePosts",fields:[authorid], references:[id])
+  favouriteBy user? @relation("favouritePosts",fields:[favouriteByid], references:[id])
   favouriteByid String?
   categories category[]
 }
@@ -47,4 +48,9 @@ model category{
   id String @id @default(uuid())
   name String 
   posts Post[]
+}
+
+enum Role{
+  BASIC
+  ADMIN
 }

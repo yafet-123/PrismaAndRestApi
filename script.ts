@@ -3,8 +3,16 @@ const prisma = new PrismaClient()
 
 async function main(){
 	// const user = await prisma.user.create({data:{name:"bini"}})
-	const users = await prisma.user.findMany()
-	console.log(users)
+	await prisma.user.deleteMany()
+	const user = await prisma.user.create({
+		data:{
+			name:"yafet",
+			email:"yafet123@gmail.com",
+			age:24,
+			
+		}
+	})
+	console.log(user)
 }
 
 // we will qrite our prisma code in the main then it will catch the error message
